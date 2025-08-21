@@ -13,7 +13,7 @@ export default defineConfig({
     lib: {
       name: "device-checker",
       entry: resolve(__dirname, "src/index.ts"),
-      fileName: "device-detector",
+      fileName: "device-checker",
       formats: ["es", "cjs"],
     },
     rollupOptions: {

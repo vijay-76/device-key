@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "type": "module",
   "repository": {
-    "url": "https://github.com/maruf-me/device-detector"
+    "url": "https://github.com/maruf-me/device-checker"
   },
   "homepage": "https://marufme.com",
   "description": "Device-checker is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
