@@ -11,7 +11,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      name: "device-detector",
+      name: "device-checker",
       entry: resolve(__dirname, "src/index.ts"),
       fileName: "device-detector",
       formats: ["es", "cjs"],

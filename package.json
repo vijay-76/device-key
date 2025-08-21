@@ -1,6 +1,6 @@
 {
   "author": "MD Maruf Hossain",
-  "name": "device-detector",
+  "name": "device-checker",
   "private": false,
   "version": "0.0.1",
   "type": "module",
@@ -8,7 +8,7 @@
     "url": "https://github.com/maruf-me/device-detector"
   },
   "homepage": "https://marufme.com",
-  "description": "Device-detector is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
+  "description": "Device-checker is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -25,8 +25,11 @@
     "device-identify",
     "device-fingerprint",
     "device-profiler",
+    "device-detector",
     "client-device-detector",
     "ua-device-detector",
+    "client-device-checker",
+    "ua-device-checker",
     "device-intelligence",
     "detectify-device",
     "device-sense",
@@ -38,13 +41,13 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/device-detector.cjs",
-  "module": "./dist/device-detector.js",
+  "main": "./dist/device-checker.cjs",
+  "module": "./dist/device-checker.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/device-detector.js",
-      "require": "./dist/device-detector.cjs"
+      "import": "./dist/device-checker.js",
+      "require": "./dist/device-checker.cjs"
     }
   },
   "types": "./dist/index.d.ts",
