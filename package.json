@@ -1,0 +1,67 @@
+{
+  "author": "MD Maruf Hossain",
+  "name": "@marufme/device-detector",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/maruf-me"
+  },
+  "homepage": "https://marufme.com",
+  "description": "Device-detector is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "deviceKey",
+    "identityCore",
+    "trackID",
+    "uniDeviceID",
+    "jsUtility",
+    "deviceFingerprint",
+    "metaDevice",
+    "secureID",
+    "fingerprintX",
+    "authDevice",
+    "shieldID",
+    "coreIdentifier",
+    "deviceScope",
+    "infoPrint",
+    "uniqueHash",
+    "cryptoID",
+    "deviceInspector",
+    "tokenKey",
+    "browserMeta",
+    "idVault",
+    "traceID",
+    "idMapper",
+    "deviceSign",
+    "dataFingerprint"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/device-detector.cjs",
+  "module": "./dist/device-detector.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/device-detector.js",
+      "require": "./dist/device-detector.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2",
+    "@types/node": "^22.9.0",
+    "vite-plugin-dts": "^4.3.0",
+    "@changesets/cli": "^2.27.9"
+  }
+}
