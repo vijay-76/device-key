@@ -2,7 +2,7 @@
 
 A lightweight, comprehensive device detection and fingerprinting library for modern web applications. Get detailed information about user devices, browsers, operating systems, and generate unique device fingerprints.
 
-[![npm version](https://badge.fury.io/js/@marufme%2Fdevice-key.svg)](https://badge.fury.io/js/@marufme%2Fdevice-key)
+[![npm version](https://img.shields.io/npm/v/@marufme/device-key.svg)](https://www.npmjs.com/package/@marufme/device-key)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## ✨ Features

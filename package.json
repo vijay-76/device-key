@@ -2,7 +2,7 @@
   "author": "MD Maruf Hossain",
   "name": "@marufme/device-key",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "repository": {
     "url": "https://github.com/maruf-me/device-key"
