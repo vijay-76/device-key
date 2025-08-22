@@ -1,165 +1,252 @@
-<!-- # js-composable
+# @marufme/device-key 🔑
 
-**JS-Composable** is a lightweight utility library designed to provide practical helper methods that simplify real-world
-use cases. Tailored for Node.js projects, it includes a versatile set of functions to streamline repetitive tasks and
-support common development needs.
+A lightweight, comprehensive device detection and fingerprinting library for modern web applications. Get detailed information about user devices, browsers, operating systems, and generate unique device fingerprints.
 
-## Key Features
+[![npm version](https://badge.fury.io/js/@marufme%2Fdevice-key.svg)](https://badge.fury.io/js/@marufme%2Fdevice-key)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- **Utility-Focused**: A collection of helper methods built to tackle everyday coding challenges.
-- **Modular and Flexible**: Use only what you need without bloating your project.
-- **Node.js Ready**: Compatible with any Node.js environment, enhancing productivity and efficiency in server-side
-  applications.
-- **Real-World Applications**: Inspired by actual project needs, providing practical solutions for real scenarios.
+## ✨ Features
 
-With **JS-Composable**, your Node.js projects get a boost in maintainability and clarity, allowing you to focus on core
-functionality while the library handles common yet essential utility tasks.
+- **🖥️ Device Detection**: Identify device type (Desktop, Mobile, Tablet)
+- **🌐 Browser Information**: Get browser name, version, engine, and vendor
+- **💻 OS Detection**: Detect operating system name, version, platform, and architecture
+- **🔋 Battery Status**: Monitor battery level, charging status, and charging time
+- **🌍 Network Info**: Get network connection type and CPU cores
+- **🆔 Device Fingerprinting**: Generate unique, stable device identifiers
+- **🎨 Canvas Fingerprinting**: Advanced fingerprinting using Canvas and WebGL
+- **🌍 Localization**: Language preferences and timezone information
+- **📱 Hardware Details**: Screen resolution, pixel ratio, and CPU cores
+- **🔒 Privacy Aware**: Server-side safe with graceful fallbacks
 
-## Installation
-
-To install the package, run the following command:
+## 🚀 Installation
 
 ```bash
-npm i @meersagor/js-composable
+npm install @marufme/device-key
 ```
 
-## Usage
+```bash
+yarn add @marufme/device-key
+```
 
-#### To use the package, import the required methods:
+```bash
+pnpm add @marufme/device-key
+```
 
-```javascript
+## 📖 Quick Start
+
+### Basic Usage
+
+```typescript
+import getDeviceInfo from "@marufme/device-key";
+
+// Get comprehensive device information
+const deviceInfo = await getDeviceInfo();
+console.log(deviceInfo);
+```
+
+### Modular Usage
+
+```typescript
 import {
-  generateFormData,
-  logGenerateFormData,
-} from "@meersagor/js-composable";
+  getOSInfo,
+  getBrowserInfo,
+  getDeviceId,
+  generateFingerprint,
+} from "@marufme/device-key";
+
+// Get specific information
+const osInfo = getOSInfo();
+const browserInfo = getBrowserInfo();
+const deviceId = await getDeviceId();
+const fingerprint = await generateFingerprint();
 ```
 
-### Example 1: Simple Object
+## 🔧 API Reference
 
-```javascript
-import { generateFormData } from "@meersagor/js-composable";
-const obj = {
-  name: "Meer Sagor",
-  age: 24,
-  skills: ["javaScript", "typeScript", "vuejs", "nuxtjs", "reactjs", "nextjs"],
-};
-const result = generateFormData({ objectData: obj });
-//  If  you  want  to  log  the  generated  FormData,  use  the  logGenerateFormData  method
-logGenerateFormData(result);
+### Main Function
+
+#### `getDeviceInfo(): Promise<Device>`
+
+Returns comprehensive device information including OS, browser, device details, network info, and more.
+
+```typescript
+const deviceInfo = await getDeviceInfo();
+// Returns:
+// {
+//   os: { name, version, platform, architecture },
+//   browser: { name, version, engine, vendor },
+//   device: { deviceId, deviceType, hardwareConcurrency, screen, battery },
+//   network: { connectionType, cores },
+//   language: { current, types },
+//   timezone: string,
+//   userAgent: string
+// }
 ```
 
-### Example 2: Object with File and Custom File Key
+### Individual Utilities
 
-Here is an example of how to use the package with an object that includes a file and a custom file key:
+#### `getOSInfo(): OSInfo`
 
-```javascript
-import { logGenerateFormData } from "@meersagor/js-composable";
-const obj2 = {
-  name: "Meer Sagor",
-  age: 24,
-  skills: ["javaScript", "typeScript", "vuejs", "nuxtjs", "reactjs", "nextjs"],
-  file: new File(["content"], "filename.txt"), //  Example  file  object
-};
-const result = generateFormData({ objectData: obj2, fileKey: "attachment" });
-//  Log  the  generated  FormData
-logGenerateFormData(result);
+Detects operating system information.
+
+```typescript
+const osInfo = getOSInfo();
+// Returns: { name, version, platform, architecture }
+// Example: { name: "Windows", version: "10", platform: "Win32", architecture: "64-bit" }
 ```
 
-A TypeScript utility for dynamically adding, updating, and ensuring the loading of custom fonts in a web application.
-This utility helps you define font-face rules for custom fonts, allowing you to update their sources and ensure the
-fonts are fully loaded in the browser.
+**Supported OS**: Windows, macOS, Android, iOS, Linux
 
-### Example: To use this `loadCustomFontFace` utility
+#### `getBrowserInfo(): BrowserInfo`
 
-```javascript
-import { loadCustomFontFace } from "@meersagor/js-composable";
+Detects browser information.
 
-await loadCustomFontFace({
-  fontFamily: "CustomFont",
-  srcUrl: "https://example.com/fonts/CustomFont.woff",
-  fontStyle: "normal",
-  fontWeight: "400",
-  format: "woff2",
-  fontDisplay: "swap",
-});
+```typescript
+const browserInfo = getBrowserInfo();
+// Returns: { name, version, engine, vendor }
+// Example: { name: "Chrome", version: "120.0.0.0", engine: "Blink", vendor: "Google Inc." }
 ```
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+**Supported Browsers**: Chrome, Firefox, Safari, Edge, Opera
 
-    <style>
-      .custom-font {
-        font-family: "CustomFont", sans-serif;
-      }
-    </style>
-  </head>
-  <body>
-    <h1 class="custom-font">Hello world</h1>
-  </body>
-</html>
+#### `getDeviceInfoBasic(): Promise<DeviceBasicInfo>`
+
+Gets basic device information including screen details and battery status.
+
+```typescript
+const deviceInfo = await getDeviceInfoBasic();
+// Returns: { deviceId, deviceType, hardwareConcurrency, screen, battery }
 ```
 
-### Example: To use this `generateImageUrlToBase64` utility
+#### `getDeviceId(): Promise<{ deviceId: string }>`
 
-To use the `generateImageUrlToBase64` function, pass it an object containing the `url` of the image to convert and an
-optional `parseType` to specify the desired output format.
+Generates or retrieves a stable device identifier.
 
-```javascript
-import { generateImageUrlToBase64 } from "@meersagor/js-composable";
-
-generateImageUrlToBase64({ url: "https://example.com/image.png" })
-  .then((base64) => console.log("Base64:", base64))
-  .catch((error) => console.error("Error:", error));
+```typescript
+const { deviceId } = await getDeviceId();
+// Returns a unique, persistent device identifier
 ```
 
-## Methods
+#### `generateFingerprint(): Promise<string>`
 
-`generateFormData`
-This method generates FormData from the provided object.
+Creates a unique device fingerprint using multiple data points.
 
-| Parameters | Type                | Description                                                                           | Default |
-| ---------- | ------------------- | ------------------------------------------------------------------------------------- | ------- |
-| objectData | object              | The object to be converted into FormData                                              | —       |
-| fileKey    | string `(optional)` | The key to use for the file if the object contains a file and want to set custom key. | —       |
+```typescript
+const fingerprint = await generateFingerprint();
+// Returns a SHA-256 hash based on device characteristics
+```
 
-#### Returns
+#### `getCanvasFingerprint(): string`
 
-- `FormData`: The generated `FormData` object.
-- `logGenerateFormData` This method logs the generated `FormData` to the console.
+Generates a canvas-based fingerprint for additional device identification.
 
-`loadCustomFontFace`
+```typescript
+const canvasFingerprint = getCanvasFingerprint();
+// Returns a canvas data URL for fingerprinting
+```
 
-| Parameters  | Type   | Description                                           | Default    |
-| ----------- | ------ | ----------------------------------------------------- | ---------- |
-| fontFamily  | string | The name of the font family.                          | —          |
-| srcUrl      | string | The URL of the font file.                             | —          |
-| format      | string | The format of the font (e.g., `'woff'`, `'woff2'`).   | `'woff'`   |
-| fontWeight  | string | The weight of the font (e.g., `'normal'`, `'bold'`).  | `'normal'` |
-| fontStyle   | string | The style of the font (e.g., `'normal'`, `'italic'`). | `'normal'` |
-| fontDisplay | string | Defines how a font face is displayed.                 | `'swap'`   |
+#### `getBatteryInfo(): Promise<BatteryInfo>`
 
-`generateImageUrlToBase64`
+Gets battery information (mobile devices only).
 
-| Parameters | Type   | Description                       | Default    |
-| ---------- | ------ | --------------------------------- | ---------- |
-| url        | string | The URL of the image to convert.  | —          |
-| parseType  | string | Output format: 'base64' or 'svg'. | `'base64'` |
+```typescript
+const batteryInfo = await getBatteryInfo();
+// Returns: { level, charging, chargingTime }
+// level: 0-100 (percentage), charging: boolean, chargingTime: seconds or null
+```
 
-## License
+#### `getNetworkInfo(): NetworkInfo`
 
-This package is open-source and available under
-the [MIT License.](https://github.com/meer-sagor/js-composable/blob/master/LICENSE)
+Gets network connection information.
 
-## Contributing
+```typescript
+const networkInfo = getNetworkInfo();
+// Returns: { connectionType, cores }
+// connectionType: "slow-2g", "2g", "3g", "4g", etc.
+```
 
-Contributions are welcome! Please feel free to submit
-a [pull request.](https://github.com/meer-sagor/js-composable/pulls)
+#### `getUserAgent(): { userAgent: string }`
 
-## Issues
+Gets the user agent string.
 
-If you encounter any issues, please create a [new issue.](https://github.com/meer-sagor/js-composable/issues) -->
+```typescript
+const { userAgent } = getUserAgent();
+// Returns the complete user agent string
+```
+
+## 📱 Device Types
+
+The library automatically detects and categorizes devices:
+
+- **Desktop**: Traditional computers and laptops
+- **Mobile**: Smartphones and mobile devices
+- **Tablet**: Tablet devices (including iPad)
+
+## 🎯 Use Cases
+
+- **Analytics**: Track device types and capabilities
+- **User Experience**: Adapt UI based on device capabilities
+- **Security**: Device fingerprinting for fraud detection
+- **Performance**: Optimize based on device specifications
+- **Debugging**: Collect device information for troubleshooting
+- **A/B Testing**: Segment users by device characteristics
+
+## 🔒 Privacy & Security
+
+- **No External APIs**: All detection is done client-side
+- **Graceful Fallbacks**: Works even when certain APIs are unavailable
+- **Server-Side Safe**: Can run in Node.js environments
+- **User Consent**: Respects user privacy preferences
+
+## 🌐 Browser Support
+
+- **Modern Browsers**: Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
+- **Mobile Browsers**: iOS Safari, Chrome Mobile, Samsung Internet
+- **Progressive Enhancement**: Features gracefully degrade on older browsers
+
+## 📦 Bundle Size
+
+- **Minified**: ~15KB
+- **Gzipped**: ~5KB
+- **Tree-shakeable**: Import only what you need
+
+## 🛠️ Development
+
+```bash
+# Clone the repository
+git clone https://github.com/maruf-me/device-key.git
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build the package
+pnpm build
+
+# Preview build
+pnpm preview
+```
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/maruf-me/device-key/issues)
+- **Documentation**: [GitHub Wiki](https://github.com/maruf-me/device-key/wiki)
+- **Author**: [MD Maruf Hossain](https://marufme.com)
+
+## 🔄 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
+
+---
+
+Made with ❤️ by [MD Maruf Hossain](https://marufme.com)

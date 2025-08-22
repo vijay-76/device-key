@@ -1,4 +1,3 @@
-import { generateFingerprint } from "../utils/fingerprint";
 import { getOSInfo } from "../utils/os";
 import { getBrowserInfo } from "../utils/browser";
 import { getDeviceInfoBasic } from "../utils/device";
@@ -6,38 +5,24 @@ import { getNetworkInfo } from "../utils/network";
 import { getUserAgent } from "../utils/user-agent";
 import type { Device } from "../types/device-info";
 
-const LOCAL_KEY = "device_id";
-
 export const getDeviceInfo = async (): Promise<Device> => {
   const os = getOSInfo();
   const browser = getBrowserInfo();
-  const { deviceType, screen } = getDeviceInfoBasic();
   const network = getNetworkInfo();
   const { userAgent } = getUserAgent();
-
-  // Device ID (stable)
-  let deviceId = "server-mode";
-  if (typeof window !== "undefined") {
-    const existing = localStorage.getItem(LOCAL_KEY);
-    if (existing) {
-      deviceId = existing;
-    } else {
-      deviceId = await generateFingerprint();
-      localStorage.setItem(LOCAL_KEY, deviceId);
-    }
-  }
+  const device = await getDeviceInfoBasic();
 
   return {
-    deviceId,
-    deviceType,
     os,
+    device,
     browser,
-    screen,
-    language: navigator.language,
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    canvasFingerprint: await generateFingerprint(),
-    userAgent,
     network,
+    userAgent,
+    language: {
+      current: navigator.language,
+      types: Array.from(navigator.languages),
+    },
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   };
 };
 
@@ -87,40 +72,3 @@ export const getDeviceInfo = async (): Promise<Device> => {
 //     },
 //   };
 // };
-
-// // Helper to parse browser details
-// function parseBrowserDetails(ua: string) {
-//   let browserName = "Unknown";
-//   let browserFullVersion = "0.0.0";
-
-//   if (ua.includes("Chrome") && !ua.includes("Edg")) {
-//     browserName = "Chrome";
-//     browserFullVersion = ua.match(/Chrome\/([\d.]+)/)?.[1] || "0.0.0";
-//   } else if (ua.includes("Firefox")) {
-//     browserName = "Firefox";
-//     browserFullVersion = ua.match(/Firefox\/([\d.]+)/)?.[1] || "0.0.0";
-//   }
-
-//   const browserMajorVersion = browserFullVersion.split(".")[0] || "0";
-
-//   return {
-//     browserName,
-//     browserMajorVersion,
-//     browserFullVersion,
-//     os: getOsName(),
-//     osVersion: "",
-//     device: "Other",
-//     userAgent: ua,
-//   };
-// }
-
-// // Detect incognito mode
-// async function detectIncognitoMode(): Promise<boolean> {
-//   if (!("storage" in navigator)) return false;
-//   try {
-//     const quota = await (navigator as any).storage.estimate();
-//     return quota && quota.quota < 120000000;
-//   } catch {
-//     return false;
-//   }
-// }

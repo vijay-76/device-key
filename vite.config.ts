@@ -11,9 +11,9 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      name: "device-checker",
+      name: "@marufme/device-key",
       entry: resolve(__dirname, "src/index.ts"),
-      fileName: "device-checker",
+      fileName: "device-key",
       formats: ["es", "cjs"],
     },
     rollupOptions: {

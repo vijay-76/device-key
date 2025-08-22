@@ -1,13 +1,18 @@
-// export const getNetworkInfo = (): { connectionType?: string } => {
-//   if (typeof navigator !== "undefined" && (navigator as any).connection) {
-//     return { connectionType: (navigator as any).connection.effectiveType };
-//   }
-//   return {};
-// };
+export const getNetworkInfo = (): {
+  connectionType?: string;
+  cores?: number;
+} => {
+  const info: { connectionType?: string; cores?: number } = {};
 
-export const getNetworkInfo = (): { connectionType?: string } => {
+  // ✅ Get network type if available
   if ("connection" in navigator) {
-    return { connectionType: (navigator as any).connection.effectiveType };
+    info.connectionType = (navigator as any).connection.effectiveType;
   }
-  return {};
+
+  // ✅ Get number of CPU cores
+  if ("hardwareConcurrency" in navigator) {
+    info.cores = navigator.hardwareConcurrency;
+  }
+
+  return info;
 };

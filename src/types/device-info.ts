@@ -1,25 +1,20 @@
+import type { BrowserInfo } from "../utils/browser";
+import type { DeviceBasicInfo } from "../utils/device";
+import type { OSInfo } from "../utils/os";
+
 export interface Device {
-  deviceId: string;
-  deviceType: string;
-  os: {
-    name: string;
-    version?: string;
+  os: OSInfo;
+  browser: BrowserInfo;
+  device: DeviceBasicInfo;
+  language: {
+    current: string;
+    types: string[];
   };
-  browser: {
-    name: string;
-    version?: string;
-  };
-  screen: {
-    width: number;
-    height: number;
-    pixelRatio: number;
-  };
-  language: string;
   timezone: string;
-  canvasFingerprint: string;
+  // canvasFingerprint: string;
   userAgent: string;
   network?: {
-    ip?: string;
+    cores?: number;
     connectionType?: string;
   };
 }

@@ -1,14 +1,14 @@
 {
   "author": "MD Maruf Hossain",
-  "name": "device-checker",
+  "name": "@marufme/device-key",
   "private": false,
   "version": "0.0.1",
   "type": "module",
   "repository": {
-    "url": "https://github.com/maruf-me/device-checker"
+    "url": "https://github.com/maruf-me/device-key"
   },
   "homepage": "https://marufme.com",
-  "description": "Device-checker is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
+  "description": "Device-key is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -41,16 +41,16 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/device-checker.cjs",
-  "module": "./dist/device-checker.js",
+  "main": "./dist/device-key.cjs",
+  "module": "./dist/device-key.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/device-checker.js",
-      "require": "./dist/device-checker.cjs"
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/device-key.js",
+      "require": "./dist/device-key.cjs"
     }
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "devDependencies": {
     "typescript": "~5.8.3",
     "vite": "^7.1.2",
