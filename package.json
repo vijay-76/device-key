@@ -2,12 +2,12 @@
   "author": "MD Maruf Hossain",
   "name": "@marufme/device-key",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "repository": {
     "url": "https://github.com/maruf-me/device-key"
   },
-  "homepage": "https://marufme.com",
+  "homepage": "https://doc-device-key.marufme.com",
   "description": "Device-key is a lightweight utility library designed to provide practical helper methods that simplify real-world\nuse cases.",
   "scripts": {
     "dev": "vite",
